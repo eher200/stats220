@@ -8,4 +8,4 @@ A little about me:
 - I am taking STATS 220 because I really enjoyed STATS 100 (especially the coding part) and want to learn more.
 - I am interested in learning about how to code (and be creative with it!), and especially how I can transfer these skills to my psychology degree and personal life.
 
-A meme that captures how I currently feel about my university studies is ![](https://tenor.com/edmzSdeZmKW.gif)
+A meme that captures how I currently feel about my university studies is ![](https://media.tenor.com/LzESVERU1OAAAAAj/chat-pouce.gif)
