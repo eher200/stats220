@@ -13,7 +13,7 @@
     > 3. I switched to a BSc in Psychology and I know I won't change my mind again because it's really fun
 * I'm originally from Wellington 💨
 * Once, I accidentally flushed my campus card down the toilet
-* Sometimes I can't decide whether I should eat dinner or study, so I found a [spinning wheel website](https://wheelofnames.com/) that helps me decide what I should do first. If I'm feeling extra indecisive I use the [magic 8 ball website](https://magic-8ball.com/) instead.
+* Sometimes I can't decide whether I should eat dinner or study, so I found a [spinning wheel website](https://wheelofnames.com/) that helps me decide what I should do first. If I'm feeling *extra* indecisive I use the [magic 8 ball website](https://magic-8ball.com/) instead.
 * The number 8 is my favourite number, which is why I have got 8 fun facts about me here, and why there are 4 **bolded** numbers in this list because they all add up to 8.
 
 ***
