@@ -20,7 +20,7 @@
 
 A meme that captures how I currently feel about my university studies is ![](https://media.tenor.com/LzESVERU1OAAAAAj/chat-pouce.gif) 
 
-#### But if this isn't funny enough, I hope you enjoy the chicken crossing the road:
+#### But if this isn't funny enough, I hope you enjoy a joke instead:
 
 ![](https://media.tenor.com/Wp1750rWNbkAAAAi/chicken-chickens.gif)
 ***
