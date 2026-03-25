@@ -4,7 +4,7 @@ output: html_fragment
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=TRUE)
 
 ```
 
@@ -18,6 +18,7 @@ background-color: #fcecc5
 
 
 ```
+
 # Dynamic report
 
 ## Tracking data related to time spent studying at a desk at home
@@ -26,22 +27,22 @@ background-color: #fcecc5
 
 I collected this data using Google Forms, with three main questions:
 
-
 1.  How long did you study for?
 
-  -   This was to the closest 10 minutes. I used regex to make sure answers were provided in digits and ending in the number 0.
+-   This was to the closest 10 minutes. I used regex to make sure answers were provided in digits and ending in the number 0.
 
 2.  What paper was the majority of the time spent studying?
 
-  -   I am doing 4 papers this semester, so I gave the options of PSYCH 200, PSYCH 202, PSYCH 207 and STATS 220.
+-   I am doing 4 papers this semester, so I gave the options of PSYCH 200, PSYCH 202, PSYCH 207 and STATS 220.
 
 3.  What mode of learning did I use primarily?
 
-  -   The options were digital and paper.
+-   The options were digital and paper.
 
 ### Overall findings (dynamic comments and bar charts)
 
 These were the findings, compiled in RStudio:
+
 ```{r}
 suppressPackageStartupMessages(library(tidyverse))
 
@@ -136,6 +137,7 @@ print(graph_2)
 ```
 
 #### There seems to be a cat meme theme throughout this course...
+
 So why not contribute 😅
 
 ![](https://c.tenor.com/nlucw3oo2PkAAAAC/tenor.gif)
