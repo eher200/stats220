@@ -1,0 +1,141 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+
+```
+
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+body {
+color: #f7a0e2;
+font-family: 'Josefin Sans';
+background-color: #fcecc5
+}
+
+
+```
+# Dynamic report
+
+## Tracking data related to time spent studying at a desk at home
+
+### Data Collection
+
+I collected this data using Google Forms, with three main questions:
+
+
+1.  How long did you study for?
+
+  -   This was to the closest 10 minutes. I used regex to make sure answers were provided in digits and ending in the number 0.
+
+2.  What paper was the majority of the time spent studying?
+
+  -   I am doing 4 papers this semester, so I gave the options of PSYCH 200, PSYCH 202, PSYCH 207 and STATS 220.
+
+3.  What mode of learning did I use primarily?
+
+  -   The options were digital and paper.
+
+### Overall findings (dynamic comments and bar charts)
+
+These were the findings, compiled in RStudio:
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQsrhn0TjCxddW92JsbZNktkmBpDePrsQiFpVsIaFOQfwe-FKyOUREwBjJjZDUYRMwNzJ6S2DGUFAXN/pub?gid=627355158&single=true&output=csv")
+
+# renaming
+latest_data <- logged_data %>%
+  rename (time_spent = 4,
+          paper_studied = 5,
+          learning_mode = 6)
+
+
+# my summary values
+maximum_time_spent <- max(latest_data$time_spent)
+
+mean_time_spent <- mean(latest_data$time_spent) %>%
+  round(0)
+
+summary_text <- paste("The longest time spent studying at a desk was", 
+      max(latest_data$time_spent),
+      "minutes.", 
+      "The mean time spent studying at a desk was", 
+      mean(latest_data$time_spent) %>%
+        round(0),
+      "minutes", 
+      collapse = " ")
+
+# Now time for my bar charts
+graph_1 <- ggplot(data = latest_data) +
+  geom_bar(aes(y = paper_studied),
+           fill = "#b94aed",
+           color = "#895B7B") +
+  labs(title = "Most Studied Papers",
+       subtitle = "Comparing the frequency of Ella Hermann's university papers studying at a desk at home in Semester One 2026",
+       caption = "Source: Google Forms",
+       x = "Paper Studied",
+       y = "Number of times this paper was the most studied")
+
+graph_2 <- ggplot(data = latest_data) + 
+  geom_bar(aes(x = time_spent),
+           fill = "#29beb2",
+           color = "#888888") +
+  theme(
+    panel.background = element_rect(fill = "#f2c7e6")
+  ) +
+  labs(title = "Distribution of Time Spent Studying",
+       subtitle = "Comparing the distribution of the time Ella Hermann has spent studying her university papers at a desk at home in Semester One 2026",
+       caption = "Source: Google Forms",
+       x = "Time Spent Studying",
+       y = "frequency")
+
+summary_text
+graph_1
+graph_2
+
+
+
+pets <- c("cat", "dog", "turtle", "rabbit")
+best_pet <- pets[1]
+
+```
+
+### Dynamic Comments
+
+These dynamic comments reflect: 1. The longest time in minutes spent studying at a desk at home 2. The mean amount of time spent studying at a desk at home, in minutes
+
+Together, these were compiled into a singular dynamic comment, which changes as the data is updated. The comment can be seen below:
+
+```{r}
+paste(summary_text)
+
+```
+
+### Most Studied Papers
+
+The first bar chart represents how many instances each paper was the most studied one. This will help me work out what papers I'm prioritising, and what ones I should study more.
+
+The first bar chart can be seen below:
+
+```{r}
+print(graph_1)
+```
+
+### Distribution of Time Spent Studying
+
+The second bar chart represents the distribution of the amount of time I spent studying at my desk at home. This will help me work out what the more common lengths of studying are, and how long (or short) some of my study sessions are.
+
+The second bar chart can be seen below:
+
+```{r}
+print(graph_2)
+```
+
+#### There seems to be a cat meme theme throughout this course...
+So why not contribute 😅
+
+![](https://c.tenor.com/nlucw3oo2PkAAAAC/tenor.gif)
