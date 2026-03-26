@@ -98,11 +98,6 @@ summary_text
 graph_1
 graph_2
 
-
-
-pets <- c("cat", "dog", "turtle", "rabbit")
-best_pet <- pets[1]
-
 ```
 
 ### Dynamic Comments
