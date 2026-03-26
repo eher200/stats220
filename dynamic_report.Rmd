@@ -1,93 +1,146 @@
 ---
-title: "Project 2"
-subtitle: "Stats 220 Semester One, 2026"
-author: "Ella Hermann"
-output: html_document
-date: "2026-03-25"
+title: My dynamic report
+output: html_fragment
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
-## Introduction
-
-### Focus for data collection
-
-The focus of my data collection was trying to gather information about my study habits when studying at a desk at home. I specified that the studying must be done at a desk and at home, because otherwise it could become subjective (for example, would sitting in a lecture theater count as studying at a desk?).
-
-I started by measuring the number of minutes to the nearest 10 minutes. I used regex to ensure that only digits would be accepted and that it would end in a “0”.
-
-Next, I wanted to measure what the most frequently studied paper was, so in the question I asked what paper I spent the most time on during this period of time. I often study more than one paper when studying so that’s why I specifically asked for the paper I spent the most time on.
-
-Lastly, I asked what mode of learning I used primarily - paper or digital. I hardly ever use paper so most of the data showed that I learned digitally.
-
-Altogether, this provided me with information about how long I study, what I study and how I study.
-
-### Guideline consideration
-
-One of the guidelines that should be followed when designing forms is Guideline 1 - Communicating Purpose. This ensures that the person filling in the form knows what my overall aim is and what I will do with their data. It’s important to also let them know who will be able to access their data after filling in the form.
-
-I considered this guideline when designing my form by stating what the purpose of the form was and the aim of collecting data - I made sure to state my name as well. For full transparency, I also included who will be able to access the data, and why (eg to mark my work). I also made sure to write that the data is going to be stored indefinitely and that all responses are anonymous.
-
-I did this all at the beginning of the form so that the people filling in the form (me) could make an informed decision as to whether they consent to filling the form out. At the end, before submission, I also included my email so that they could email me if they had any questions about the survey before submitting their information.
-
-### Learning from the analysed data
-
-The data I collected is going to help me learn more about my study habits. By looking at what learning modes I am using, this will help me work out whether I have a good balance between digital and non-digital ways of learning (or not!).
-
-Learning about what papers I study the most will also help me work out whether my time management of all my courses is even (It was not. But that’s because I have this project for STATS 220 and a test for PSYCH 207 so I think that’s why I spent hardly any time on my other papers).
-
-Learning modes will also help me determine whether digital or paper is my preferred way to learn.
-
-Altogether, learning about all the different aspects to how I study at home is going to help me make more informed decisions regarding my study habits, and how I manage my time.
-
-### Link to Google Form
-
-#### Form design and data collection for this project were completed by me.
-
-[Link to form](https://docs.google.com/forms/d/e/1FAIpQLScXeJeZ2yEoTO__3M_GNJhfTaIWQxv3ZZge7enmS9fiPzboJA/viewform)
-
-## Dynamic report
-
-### Link to GitHub Pages
-
-[Link to GitHub](https://eher200.github.io/stats220/)
-
-## Creativity
-
-I think my project demonstrates creativity in a couple of ways. First of all, I changed the colours in my Google Form to make it yellow, as STATS 220 is a “yellow” subject in my head, and I am the only one filling in the form.
-
-Secondly, I think I chose a pretty creative topic of studying at my desk at home, as it wasn’t in the suggested list and I came up with it myself. I considered doing each time I cried because I am actually tracking how much I cry but I thought it would be a bit weird for an assessment that other people are going to mark, and I most likely wouldn’t cry 20 times before the project is due.
-
-I also created a “qualification criteria” at the beginning of the survey to ensure that the respondent meets the criteria of studying (defined as studying more than 90% of the time they report) and also at a desk at home. If they didn’t qualify, it redirects them to the end of the survey so they don’t need to fill any information in.
-
-I also used regex to ensure that the number of minutes in the form was provided in digits only and that it ended in a 0.
-
-I also used some of the skills from Module 1 when creating my dynamic report, by changing the colour of the text and background, and also changing the font. I also reused some skills from STATS 100 when changing the background of the graph.
-
-I also inserted a cat meme at the end which I think is creative too.
-
-## Learning reflection
-
-### One important idea
-
-One important idea from Module 2 was that it’s very important to consider the respondent in the form as there are lots of ways that people can (intentionally or unintentionally) mess up the form. The guidelines do a good job of making sure that lots of things are considered.
-
-### Things I am curious about exploring further
-
-I am excited to learn more about forms and making them linked to spreadsheets as I often keep track of random things and like to see it visualised. I would previously make forms but manually added it all to the spreadsheet. Now I can not only link it, but incorporate RStudio to add graphs. Therefore I’m excited about exploring more with forms.
-
-### (Lack of) Group Work
-
-I didn’t work in a group even though I wanted to because I was nervous about not being able to get a “headstart”. I already attend the study groups every friday (except one week where I showed up at the wrong time oops), so I aim to continue doing this to make sure I can still learn from and help my peers.
-
-## Appendix
-
-```{r file='exploration.R', eval=FALSE, echo=TRUE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
 
 ```
 
-```{r file='dynamic_report.Rmd', eval=FALSE, echo=TRUE}
+```{css}
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+body {
+color: #f7a0e2;
+font-family: 'Josefin Sans';
+background-color: #fcecc5
+}
+
 
 ```
+
+# Dynamic report
+
+## Tracking data related to time spent studying at a desk at home
+
+### Data Collection
+
+I collected this data using Google Forms, with three main questions:
+
+1.  How long did you study for?
+
+-   This was to the closest 10 minutes. I used regex to make sure answers were provided in digits and ending in the number 0.
+
+2.  What paper was the majority of the time spent studying?
+
+-   I am doing 4 papers this semester, so I gave the options of PSYCH 200, PSYCH 202, PSYCH 207 and STATS 220.
+
+3.  What mode of learning did I use primarily?
+
+-   The options were digital and paper.
+
+### Overall findings (dynamic comments and bar charts)
+
+These were the findings, compiled in RStudio:
+
+```{r}
+library(tidyverse)
+
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQsrhn0TjCxddW92JsbZNktkmBpDePrsQiFpVsIaFOQfwe-FKyOUREwBjJjZDUYRMwNzJ6S2DGUFAXN/pub?gid=627355158&single=true&output=csv")
+
+# renaming
+
+latest_data <- logged_data %>%
+  rename (time_spent = 4,
+          paper_studied = 5,
+          learning_mode = 6)
+
+
+# my summary values - the maximum time spent studying and the mean time spent studying
+
+maximum_time_spent <- max(latest_data$time_spent)
+
+mean_time_spent <- mean(latest_data$time_spent) %>%
+  round(0)
+
+# creating a sentence
+
+summary_text <- paste("The longest time spent studying at a desk was", 
+      max(latest_data$time_spent),
+      "minutes.", 
+      "The mean time spent studying at a desk was", 
+      mean(latest_data$time_spent) %>%
+        round(0),
+      "minutes", 
+      collapse = " ")
+
+# Now time for my bar charts. The first one compares the frequency of when I study each paper.
+
+
+graph_1 <- ggplot(data = latest_data) +
+  geom_bar(aes(y = paper_studied),
+           fill = "#b94aed",
+           color = "#895B7B") +
+  labs(title = "Most Studied Papers",
+       subtitle = "Comparing the frequency of Ella Hermann's university papers studying at a desk at home in Semester One 2026",
+       caption = "Source: Google Forms",
+       x = "Paper Studied",
+       y = "Number of times this paper was the most studied")
+
+# The second graph is a distribution of the time I spent studying
+  
+graph_2 <- ggplot(data = latest_data) + 
+    geom_bar(aes(x = learning_mode),
+             fill = "#29beb2",
+             color = "#888888") +
+    theme(
+      panel.background = element_rect(fill = "#f2c7e6")
+    ) +
+    labs(title = "Distribution of Time Spent Studying",
+         subtitle = "Comparing the distribution of learning modes Ella Hermann has used studying her university papers at a desk at home in Semester One 2026",
+         caption = "Source: Google Forms",
+         x = "Mode of learning",
+         y = "frequency")
+  
+
+summary_text
+graph_1
+graph_2
+```
+
+### Dynamic Comments
+
+These dynamic comments reflect: 1. The longest time in minutes spent studying at a desk at home 2. The mean amount of time spent studying at a desk at home, in minutes
+
+Together, these were compiled into a singular dynamic comment, which changes as the data is updated. The comment can be seen below:
+
+```{r}
+paste(summary_text)
+
+```
+
+### Most Studied Papers
+
+The first bar chart represents how many instances each paper was the most studied one. This will help me work out what papers I'm prioritising, and what ones I should study more.
+
+The first bar chart can be seen below:
+
+```{r}
+print(graph_1)
+```
+
+### Distribution of Time Spent Studying
+
+The second bar chart represents the distribution of the amount of time I spent studying at my desk at home. This will help me work out what the more common lengths of studying are, and how long (or short) some of my study sessions are.
+
+The second bar chart can be seen below:
+
+```{r}
+print(graph_2)
+```
+
+#### There seems to be a cat meme theme throughout this course...
+
+So why not contribute 😅
+
+![](https://c.tenor.com/nlucw3oo2PkAAAAC/tenor.gif)
