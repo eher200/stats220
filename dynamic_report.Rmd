@@ -21,7 +21,7 @@ background-color: #fcecc5
 
 # Dynamic report
 
-## Tracking data related to time spent studying at a desk at home
+## Tracking data related to studying at a desk at home
 
 ### Data Collection
 
