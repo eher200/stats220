@@ -45,6 +45,10 @@ I collected this data using Google Forms, with three main questions:
 These were the findings, compiled in RStudio:
 
 ```{r}
+# THE ACTUAL STUFF?
+
+# I have no idea if I'm doing this right but I will copy paste the code that will produce the 2 summary values and 2 bar charts that I want
+
 library(tidyverse)
 
 logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQsrhn0TjCxddW92JsbZNktkmBpDePrsQiFpVsIaFOQfwe-FKyOUREwBjJjZDUYRMwNzJ6S2DGUFAXN/pub?gid=627355158&single=true&output=csv")
@@ -59,18 +63,18 @@ latest_data <- logged_data %>%
 
 # my summary values - the maximum time spent studying and the mean time spent studying
 
-maximum_time_spent <- max(latest_data$time_spent)
+maximum_time_spent <- max(latest_data$time_spent, na.rm = TRUE)
 
-mean_time_spent <- mean(latest_data$time_spent) %>%
+mean_time_spent <- mean(latest_data$time_spent, na.rm = TRUE) %>%
   round(0)
 
 # creating a sentence
 
 summary_text <- paste("The longest time spent studying at a desk was", 
-      max(latest_data$time_spent),
+      max(latest_data$time_spent, na.rm = TRUE),
       "minutes.", 
       "The mean time spent studying at a desk was", 
-      mean(latest_data$time_spent) %>%
+      mean(latest_data$time_spent, na.rm = TRUE) %>%
         round(0),
       "minutes", 
       collapse = " ")
@@ -81,7 +85,7 @@ summary_text <- paste("The longest time spent studying at a desk was",
 graph_1 <- ggplot(data = latest_data) +
   geom_bar(aes(y = paper_studied),
            fill = "#b94aed",
-           color = "#895B7B") +
+           color = "#895B7B",) +
   labs(title = "Most Studied Papers",
        subtitle = "Comparing the frequency of Ella Hermann's university papers studying at a desk at home in Semester One 2026",
        caption = "Source: Google Forms",
