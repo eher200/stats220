@@ -45,8 +45,6 @@ I collected this data using Google Forms, with three main questions:
 These were the findings, compiled in RStudio:
 
 ```{r}
-# THE ACTUAL STUFF?
-
 # I have no idea if I'm doing this right but I will copy paste the code that will produce the 2 summary values and 2 bar charts that I want
 
 library(tidyverse)
@@ -58,23 +56,26 @@ logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQsrhn0
 latest_data <- logged_data %>%
   rename (time_spent = 4,
           paper_studied = 5,
-          learning_mode = 6)
+          learning_mode = 6) 
+
+clean_data_frame <- latest_data %>%
+  na.omit()
 
 
 # my summary values - the maximum time spent studying and the mean time spent studying
 
-maximum_time_spent <- max(latest_data$time_spent, na.rm = TRUE)
+maximum_time_spent <- max(clean_data_frame$time_spent)
 
-mean_time_spent <- mean(latest_data$time_spent, na.rm = TRUE) %>%
+mean_time_spent <- mean(clean_data_frame$time_spent) %>%
   round(0)
 
 # creating a sentence
 
 summary_text <- paste("The longest time spent studying at a desk was", 
-      max(latest_data$time_spent, na.rm = TRUE),
+      max(clean_data_frame$time_spent),
       "minutes.", 
       "The mean time spent studying at a desk was", 
-      mean(latest_data$time_spent, na.rm = TRUE) %>%
+      mean(clean_data_frame$time_spent) %>%
         round(0),
       "minutes", 
       collapse = " ")
@@ -82,7 +83,8 @@ summary_text <- paste("The longest time spent studying at a desk was",
 # Now time for my bar charts. The first one compares the frequency of when I study each paper.
 
 
-graph_1 <- ggplot(data = latest_data) +
+
+graph_1 <- ggplot(data = clean_data_frame) +
   geom_bar(aes(y = paper_studied),
            fill = "#b94aed",
            color = "#895B7B",) +
@@ -94,7 +96,7 @@ graph_1 <- ggplot(data = latest_data) +
 
 # The second graph is a distribution of the time I spent studying
   
-graph_2 <- ggplot(data = latest_data) + 
+graph_2 <- ggplot(data = clean_data_frame) + 
     geom_bar(aes(x = learning_mode),
              fill = "#29beb2",
              color = "#888888") +
@@ -107,7 +109,7 @@ graph_2 <- ggplot(data = latest_data) +
          x = "Mode of learning",
          y = "frequency")
   
-
+###### here are my final summary values and graphs. my reasoning for using this data is above
 summary_text
 graph_1
 graph_2
