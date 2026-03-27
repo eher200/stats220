@@ -45,45 +45,42 @@ I collected this data using Google Forms, with three main questions:
 These were the findings, compiled in RStudio:
 
 ```{r}
-# I have no idea if I'm doing this right but I will copy paste the code that will produce the 2 summary values and 2 bar charts that I want
-
+#code i'll be using in dynamic report
+# using the function to read the csv data into a data frame
 library(tidyverse)
 
 logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQsrhn0TjCxddW92JsbZNktkmBpDePrsQiFpVsIaFOQfwe-FKyOUREwBjJjZDUYRMwNzJ6S2DGUFAXN/pub?gid=627355158&single=true&output=csv")
 
-# renaming
-
+# renaming the relevant variables in the data frame
 latest_data <- logged_data %>%
-  rename (time_spent = 4,
+  rename (time_stamp = 1,
+          sat_at_desk = 2,
+          majority_time_studying = 3,
+          time_spent = 4,
           paper_studied = 5,
-          learning_mode = 6) 
+          learning_mode = 6)
 
+# getting rid of na values
 clean_data_frame <- latest_data %>%
   na.omit()
 
-
 # my summary values - the maximum time spent studying and the mean time spent studying
-
 maximum_time_spent <- max(clean_data_frame$time_spent)
 
 mean_time_spent <- mean(clean_data_frame$time_spent) %>%
   round(0)
 
 # creating a sentence
-
 summary_text <- paste("The longest time spent studying at a desk was", 
-      max(clean_data_frame$time_spent),
-      "minutes.", 
-      "The mean time spent studying at a desk was", 
-      mean(clean_data_frame$time_spent) %>%
-        round(0),
-      "minutes", 
-      collapse = " ")
+                      max(clean_data_frame$time_spent),
+                      "minutes.", 
+                      "The mean time spent studying at a desk was", 
+                      mean(clean_data_frame$time_spent) %>%
+                        round(0),
+                      "minutes", 
+                      collapse = " ")
 
 # Now time for my bar charts. The first one compares the frequency of when I study each paper.
-
-
-
 graph_1 <- ggplot(data = clean_data_frame) +
   geom_bar(aes(y = paper_studied),
            fill = "#b94aed",
@@ -95,20 +92,19 @@ graph_1 <- ggplot(data = clean_data_frame) +
        y = "Number of times this paper was the most studied")
 
 # The second graph is a distribution of the time I spent studying
-  
 graph_2 <- ggplot(data = clean_data_frame) + 
-    geom_bar(aes(x = learning_mode),
-             fill = "#29beb2",
-             color = "#888888") +
-    theme(
-      panel.background = element_rect(fill = "#f2c7e6")
-    ) +
-    labs(title = "Distribution of Time Spent Studying",
-         subtitle = "Comparing the distribution of learning modes Ella Hermann has used studying her university papers at a desk at home in Semester One 2026",
-         caption = "Source: Google Forms",
-         x = "Mode of learning",
-         y = "frequency")
-  
+  geom_bar(aes(x = learning_mode),
+           fill = "#29beb2",
+           color = "#888888") +
+  theme(
+    panel.background = element_rect(fill = "#f2c7e6")
+  ) +
+  labs(title = "Distribution of Time Spent Studying",
+       subtitle = "Comparing the distribution of learning modes Ella Hermann has used studying her university papers at a desk at home in Semester One 2026",
+       caption = "Source: Google Forms",
+       x = "Mode of learning",
+       y = "frequency")
+
 ###### here are my final summary values and graphs. my reasoning for using this data is above
 summary_text
 graph_1
