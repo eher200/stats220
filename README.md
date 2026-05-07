@@ -2,6 +2,9 @@
 
 ## This is my repo for STATS 220. 
 
+## Here is my link to Project 4 - Visual Data Story
+[Click here](https://eher200.github.io/stats220/visual_data_story.html)
+
 ### 8 fun facts about me:
 
 * I am undertaking a degree in Science majoring in Psychology.
